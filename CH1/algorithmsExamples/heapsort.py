@@ -10,19 +10,17 @@ def left(i):
 
 """Max Heapify function. The ideia of this function is to
 preserve the Max-Heapify property inside a heap"""
-def max_heapify(A: List[int], i: int) -> List:
-    l = left(i)
+def max_heapify(A: List[int], N: int,i: int) -> None:
     
+    largest = i
+    l = left(i)
     r = right(i)
-    "is A.heap_size === len(A)?"
-    if l < len(A) and A[l] > A[i]:
+
+    if l < N and A[l] > A[largest]:
         largest = l
-    else:
-        largest = i
-    if r <= len(A) and A[r] > A[largest]:
+    if r < N and A[r] > A[largest]:
         largest = r
 
     if largest != i:
-        A[i] = A[largest]
-        max_heapify(A, largest)
-    return A
+        A[i], A[largest] = A[largest], A[i]
+        max_heapify(A, N, largest)
